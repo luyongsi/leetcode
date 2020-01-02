@@ -14,24 +14,15 @@ class Solution {
         if (root == null) {
             return true;
         }
-        if (root.left == null && root.right == null) {
+        return isMirror(root, root);
+    }
+
+    public boolean isMirror(TreeNode t1, TreeNode t2) {
+        if (t1 == null && t2 == null)
             return true;
-
-        }
-        if (root.left == null || root.right == null) {
+        if (t1 == null || t2 == null)
             return false;
-        }
-        if (root.left.val != root.right.val) {
-            return false;
-        }
-        TreeNode temp = new TreeNode(root.left.val);
-        temp.left = root.left.left;
-        temp.right = root.right.right;
-
-        TreeNode temp1 = new TreeNode(root.right.val);
-        temp1.left = root.right.left;
-        temp1.right = root.left.right;
-        return isSymmetric(temp) && isSymmetric(temp1);
+        return (t1.val == t2.val) && isMirror(t1.right, t2.left) && isMirror(t1.left, t2.right);
     }
 
 }
